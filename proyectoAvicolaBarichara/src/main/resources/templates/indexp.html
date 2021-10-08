@@ -1,0 +1,89 @@
+<html>
+<head>
+
+<style type="text/css">
+	body, html{
+		width:250px;
+	}
+
+	input:not([type="checkbox"]):not([type="radio"]),select{
+		width:160px;
+	}
+	input:not([type="radio"]), select{
+		margin-bottom:15px;
+	}
+	
+	.button{
+		width:200px !important;
+	}
+	
+</style>
+</head>
+<body>
+	<span>Informacion</span>
+	<form th:action="@{/crearPersona}" th:object="${Persona}" method="POST" id="personaForm">
+		<div style="border: 1px solid black; padding:20px;">
+		<span th:if="${persona.id_persona !=null}"><input type="text" th:field="${Persona.id_person}" readonly><br/></span>
+		
+		<label th:text="Usuario"></label><br/>
+		<input type="text" placeholder="Usuario" th:field="${Persona.name}"/><br/>
+		
+		<label th:text="Nombre"></label><br/>
+		<input type="text" placeholder="Nombre" th:field="${Persona.address}"/><br/>
+		
+		<label th:text="Nombre"></label><br/>
+		<input type="text" placeholder="Nombre" th:field="${Persona.cellphone}"/><br/>
+		
+		<label th:text="Nombre"></label><br/>
+		<input type="text" placeholder="Nombre" th:field="${Persona.cellphone}"/><br/>
+		
+		<label th:text="Nombre"></label><br/>
+		<input type="text" placeholder="Nombre" th:field="${Persona.city}"/><br/>
+		
+	
+		
+		<span>Identificacion</span>
+		<div style="border: 1px solid black; padding:20px;">
+			<label th:text="numero"></label><br/>
+			<input type="text" placeholder="Nombre" th:field="${Persona.identityDocument.number_document}"/><br/>
+		
+			<label th:text="tipo"></label><br/>
+		<input type="text" placeholder="Nombre" th:field="${Persona.identityDocument.type_document}"/><br/>
+		</div>
+		
+				
+		<input type="Submit" th:value="${persona.id_person != null }?'Guardar Persona':'Crear Persona'" th:class="button"/>
+		<th:block th:if="${persona.id_person !=null}">
+			<a th:href="@{/index}">Cancel</a>	
+		</th:block>
+	</form>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Usuario</th>
+				<th>Nombre</th>
+				<th>Roles</th>
+				<th>Actiones</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="persona : ${personas}">
+				<td th:text="${persona.id_person}"></td>
+				<td th:text="${persona.name}"></td>
+				<td th:text="${persona.cellphone}"></td>
+				<td th:text="${persona.address}"></td>
+				<td th:text="${persona.district}"></td>
+				<td th:text="${persona.city}"></td>
+				<td th:text="${persona.identityDocument.number_document}"></td>
+				<td><a th:href="@{'/editarPersona/'+ ${persona.id_person}}"> Editar </a> | <a th:href="@{'/eliminarPersona/' + ${persona.id_person}}">Eliminar</a></td>
+			</tr>
+		
+		</tbody>
+	
+	
+	</table>
+</body>
+</html>
